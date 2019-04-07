@@ -34,12 +34,13 @@ const {
   clientProjectName,
   clientFilesPath,
 } = require('yoshi-config');
+const { templates: templatesPattern } = require('yoshi-config/globs');
 const wixDepCheck = require('../tasks/dep-check');
 
 const inTeamCity = checkInTeamCity();
 
 const copyTemplates = async () => {
-  const files = await globby('**/*.{ejs,vm}', { cwd: SRC_DIR });
+  const files = await globby(templatesPattern, { cwd: SRC_DIR });
 
   await Promise.all(
     files.map(file => {

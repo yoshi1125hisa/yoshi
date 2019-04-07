@@ -24,6 +24,7 @@ module.exports = {
   multipleModules: {
     clientDist: dist,
   },
+  templates: '**/*.{ejs,vm}',
   less: [`${base}/**/*.less`, `!${base}/assets/**/*`],
   scss: [`${base}/**/*.scss`, `!${base}/assets/**/*`],
 };

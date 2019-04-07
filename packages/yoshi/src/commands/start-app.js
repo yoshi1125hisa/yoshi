@@ -25,11 +25,14 @@ const chalk = require('chalk');
 const openBrowser = require('react-dev-utils/openBrowser');
 const chokidar = require('chokidar');
 const project = require('yoshi-config');
+const { templates: templatesPattern } = require('yoshi-config/globs');
 const {
   BUILD_DIR,
   PUBLIC_DIR,
   ASSETS_DIR,
   TARGET_DIR,
+  SRC_DIR,
+  STATICS_DIR,
 } = require('yoshi-config/paths');
 const { PORT } = require('../constants');
 const {
@@ -47,22 +50,22 @@ const host = '0.0.0.0';
 
 const https = cliArgs.https || project.servers.cdn.ssl;
 
-function watchPublicFolder() {
-  const watcher = chokidar.watch(PUBLIC_DIR, {
+function watchAndCopy({ pattern, cwd = pattern, target }) {
+  const watcher = chokidar.watch(pattern, {
     persistent: true,
     ignoreInitial: false,
-    cwd: PUBLIC_DIR,
+    cwd,
   });
 
   const copyFile = relativePath => {
     return fs.copy(
-      path.join(PUBLIC_DIR, relativePath),
-      path.join(ASSETS_DIR, relativePath),
+      path.join(cwd, relativePath),
+      path.join(target, relativePath),
     );
   };
 
   const removeFile = relativePath => {
-    return fs.remove(path.join(ASSETS_DIR, relativePath));
+    return fs.remove(path.join(target, relativePath));
   };
 
   watcher.on('change', copyFile);
@@ -78,8 +81,15 @@ module.exports = async () => {
   if (await fs.pathExists(PUBLIC_DIR)) {
     // all files in `PUBLIC_DIR` are copied initially as Chokidar's `ignoreInitial`
     // option is set to false
-    watchPublicFolder();
+    watchAndCopy({ pattern: PUBLIC_DIR, target: ASSETS_DIR });
   }
+
+  // Watch and copy templates to `dist/statics`
+  watchAndCopy({
+    pattern: templatesPattern,
+    cwd: SRC_DIR,
+    target: STATICS_DIR,
+  });
 
   const clientConfig = createClientWebpackConfig({
     isDebug: true,

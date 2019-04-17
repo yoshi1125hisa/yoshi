@@ -2,7 +2,7 @@ const dargs = require('dargs');
 const crossSpawn = require('cross-spawn');
 const { printAndExitOnErrors } = require('../../error-handler');
 
-const protractor = async (debugPort, debugBrkPort) => {
+const protractor = async (debugPort, debugBrkPort, userProtractorConfig) => {
   let protractorBin;
   let webdriverBin;
   let protractorVersion;
@@ -72,6 +72,10 @@ const protractor = async (debugPort, debugBrkPort) => {
       webDriverUpdate.on('exit', () => {
         const protractorProcess = crossSpawn('node', protractorArgs, {
           stdio: 'inherit',
+          env: {
+            ...process.env,
+            YOSHI_PC: userProtractorConfig,
+          },
         });
         protractorProcess.on('exit', code => {
           code === 0

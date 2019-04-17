@@ -19,7 +19,10 @@ const project = require('yoshi-config');
 
 setupRequireHooks();
 
-const userConfPath = path.resolve('protractor.conf.js');
+const userConfPath = process.env.YOSHI_PC
+  ? path.resolve(process.env.YOSHI_PC)
+  : path.resolve('protractor.conf.js');
+
 const userConf = exists(userConfPath) ? require(userConfPath).config : null;
 
 const shouldUseProtractorBrowserLogs =

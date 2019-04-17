@@ -31,6 +31,7 @@ prog
   .option('--protractor', 'Run e2e tests with Protractor')
   .option('--debug', 'Allow test debugging')
   .option('--coverage', 'Collect and output code coverage')
+  .option('--protractor-config [protractorConfig]', 'Protractor config path')
   .option(
     '--debug-brk',
     "Allow test debugging, process won't start until debugger will be attached",

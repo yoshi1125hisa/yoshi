@@ -236,7 +236,7 @@ module.exports = runner.command(
 
     if (shouldRunProtractor) {
       await bootstrapCdn();
-      return protractor(debugPort, debugBrkPort, cliArgs.protractorConfig);
+      return protractor(debugPort, debugBrkPort, cliArgs['protractor-config']);
     }
   },
   { persistent: shouldWatch },

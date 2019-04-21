@@ -184,6 +184,15 @@ module.exports.tryRequire = name => {
   return require(absolutePath);
 };
 
+module.exports.dependencyInstalled = dependencyName => {
+  try {
+    require.resolve(dependencyName);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 // NOTE: We don't use "mergeByConcat" function in our codebase anymore,
 // it's here only for legacy reasons.
 // Versions 3.10.0 -> 3.13.1 would not work after the deletion of this function

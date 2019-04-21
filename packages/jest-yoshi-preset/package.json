@@ -40,6 +40,7 @@
     "babel-preset-yoshi": "4.1.0",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
+    "jest-environment-node": "^24.7.1",
     "jest-transform-graphql": "^2.1.0",
     "typescript": "^3.0.1"
   }

@@ -34,14 +34,7 @@ function logIfAny(log) {
 
 module.exports.createBabelConfig = (presetOptions = {}) => {
   return {
-    presets: [
-      [
-        require.resolve('babel-preset-yoshi', {
-          paths: [__filename, require.resolve('yoshi')],
-        }),
-        presetOptions,
-      ],
-    ],
+    presets: [[require.resolve('babel-preset-yoshi'), presetOptions]],
     babelrc: false,
     configFile: false,
   };

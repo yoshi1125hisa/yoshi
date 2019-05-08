@@ -50,8 +50,5 @@
     "presets": [
       "yoshi"
     ]
-  },
-  "eslintConfig": {
-    "extends": "yoshi"
   }
 }

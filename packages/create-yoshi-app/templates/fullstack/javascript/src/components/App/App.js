@@ -12,9 +12,9 @@ class App extends React.Component {
   static propTypes = {
     t: PropTypes.func,
   };
-  state = {};
 
   /* <-- Feel free to remove this lifecycle hook */
+  state = {};
   async componentDidMount() {
     await import(
       /* webpackIgnore: true */
@@ -27,7 +27,6 @@ class App extends React.Component {
 
   render() {
     const { t } = this.props;
-    const { TemplateIntro } = this.state;
 
     return (
       <div className={s.root}>
@@ -35,7 +34,8 @@ class App extends React.Component {
         <h2 className={s.title} data-testid="app-title">
           {t('app.title')}
         </h2>
-        {TemplateIntro && <TemplateIntro />}
+        {this.state.TemplateIntro &&
+          React.createElement(this.state.TemplateIntro)}
         {/* --> */}
       </div>
     );

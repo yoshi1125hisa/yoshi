@@ -16,7 +16,6 @@
     "src",
     "bin",
     "config",
-    "babel-preset-yoshi.js",
     "types.d.ts"
   ],
   "dependencies": {

@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import s from './App.scss';
-import PropTypes from 'prop-types';
 
 /* <-- To remove demo stuff just copy-paste:
   \{?/\*\s?<--([\n\n]|.)*?-->\s?\*\/\}?
